@@ -47,7 +47,7 @@ ArchiveFile* SzArchive::OpenFile(const char* name)
 		if (isDir)
 			continue;
 
-		int len = SzArEx_GetFileNameUtf16(&szarchive, i, fname);
+		size_t len = SzArEx_GetFileNameUtf16(&szarchive, i, fname);
 		char szname[512];
 		int j = 0;
 		for (; j < len && j < sizeof(szname) - 1; j++)
@@ -62,7 +62,7 @@ ArchiveFile* SzArchive::OpenFile(const char* name)
 		if (res != SZ_OK)
 			return NULL;
 
-		return new SzArchiveFile(out_buffer, offset, (u32)out_size_processed);
+		return new SzArchiveFile(out_buffer, (u32)offset, (u32)out_size_processed);
 	}
 	return NULL;
 }
